@@ -26,7 +26,7 @@ public class MainController implements Initializable {
 
     public void onClickTeambuilderButton(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/digimonbattlesimulator/TeamBuilder.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml"));
 
             Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(loader.load());
