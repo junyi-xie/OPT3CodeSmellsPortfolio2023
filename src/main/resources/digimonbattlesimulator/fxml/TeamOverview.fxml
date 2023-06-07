@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digimonbattlesimulator.controller.TeamOverviewController">
-</BorderPane>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digimonbattlesimulator.controller.TeamOverviewController">
+   <BorderPane minHeight="600.0" minWidth="800.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <top>
+         <HBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+             <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="Team Overview" />
+         </HBox>
+      </top>
+      <center>
+         <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="TOP_LEFT">
+             <HBox alignment="TOP_CENTER">
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All teams (0)" />
+             </HBox>
+             <HBox alignment="TOP_CENTER" spacing="10.0">
+                 <MFXButton text="New Team" />
+                 <MFXButton layoutX="372.0" layoutY="10.0" text="New Box" />
+             </HBox>
+         </VBox>
+      </center>
+   </BorderPane>
+</AnchorPane>
