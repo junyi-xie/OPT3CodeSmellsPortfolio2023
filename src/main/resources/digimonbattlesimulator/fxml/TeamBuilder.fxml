@@ -1,9 +1,357 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digimonbattlesimulator.controller.TeamBuilderController">
-   <BorderPane minHeight="600.0" minWidth="800.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+   <BorderPane AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <center>
+         <VBox spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+               <GridPane hgap="10.0" layoutX="10.0" layoutY="10.0" maxHeight="50.0" prefHeight="100.0" prefWidth="780.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                     <Label text="Digimon">
+                        <font>
+                           <Font size="24.0" />
+                        </font>
+                     </Label>
+                     <Label text="Type" GridPane.columnIndex="1">
+                        <font>
+                           <Font size="24.0" />
+                        </font>
+                     </Label>
+                     <Label text="Ability" GridPane.columnIndex="2">
+                        <font>
+                           <Font size="24.0" />
+                        </font>
+                     </Label>
+                     <Label layoutX="468.0" layoutY="27.0" text="Stats" GridPane.columnIndex="3">
+                        <font>
+                           <Font size="24.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </GridPane>
+               <GridPane hgap="10.0" maxHeight="50.0" prefHeight="100.0" prefWidth="780.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                     <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../sprites/agumon_sprite.png" />
+                        </image>
+                     </ImageView>
+                     <Label text="Agumon" GridPane.columnIndex="1" />
+                     <Label text="Fire" GridPane.columnIndex="2" />
+                     <Label text="Blaze" GridPane.columnIndex="3" />
+                     <GridPane GridPane.columnIndex="4">
+                        <columnConstraints>
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                           <VBox prefHeight="200.0" prefWidth="100.0">
+                              <children>
+                                 <Label text="HP" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="100" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                              <children>
+                                 <Label text="Atk" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="130" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="53.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                              <children>
+                                 <Label text="Def" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="80" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                              <children>
+                                 <Label text="Spd" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="90" />
+                              </children>
+                           </VBox>
+                        </children>
+                     </GridPane>
+                     <MFXButton text="Add to team" GridPane.columnIndex="5" />
+                  </children>
+               </GridPane>
+               <GridPane hgap="10.0" maxHeight="50.0" prefHeight="100.0" prefWidth="780.0">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../sprites/deathmon_sprite.png" />
+                        </image>
+                     </ImageView>
+                     <Label text="Deathmon" GridPane.columnIndex="1" />
+                     <Label text="Dark" GridPane.columnIndex="2" />
+                     <Label text="Dark Aura" GridPane.columnIndex="3" />
+                     <GridPane GridPane.columnIndex="4">
+                       <columnConstraints>
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                       </columnConstraints>
+                       <rowConstraints>
+                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       </rowConstraints>
+                        <children>
+                           <VBox prefHeight="200.0" prefWidth="100.0">
+                              <children>
+                                 <Label text="HP" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="65" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                              <children>
+                                 <Label text="Atk" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="136" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="53.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                              <children>
+                                 <Label text="Def" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="94" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                              <children>
+                                 <Label text="Spd" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="135" />
+                              </children>
+                           </VBox>
+                        </children>
+                     </GridPane>
+                     <MFXButton text="Add to team" GridPane.columnIndex="5" />
+                  </children>
+               </GridPane>
+               <GridPane hgap="10.0" maxHeight="50.0" prefHeight="100.0" prefWidth="780.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                     <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../sprites/yukidarumon_sprite.png" />
+                        </image>
+                     </ImageView>
+                     <Label text="Yukidarumon" GridPane.columnIndex="1" />
+                     <Label text="Ice" GridPane.columnIndex="2" />
+                     <Label text="Torrent" GridPane.columnIndex="3" />
+                     <GridPane GridPane.columnIndex="4">
+                        <columnConstraints>
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                           <VBox prefHeight="200.0" prefWidth="100.0">
+                              <children>
+                                 <Label text="HP" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="101" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                              <children>
+                                 <Label text="Atk" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="150" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="53.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                              <children>
+                                 <Label text="Def" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="100" />
+                              </children>
+                           </VBox>
+                           <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                              <children>
+                                 <Label text="Spd" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="139" />
+                              </children>
+                           </VBox>
+                        </children>
+                     </GridPane>
+                     <MFXButton text="Add to team" GridPane.columnIndex="5" />
+                  </children>
+               </GridPane>
+            </children>
+         </VBox>
+      </center>
+      <top>
+         <VBox BorderPane.alignment="CENTER">
+            <children>
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <children>
+                     <MFXButton text="&lt; Go back" />
+                     <Label text="[Your team]">
+                        <font>
+                           <Font size="36.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <GridPane hgap="10.0">
+                       <columnConstraints>
+                         <ColumnConstraints hgrow="NEVER" maxWidth="90.0" prefWidth="90.0" />
+                         <ColumnConstraints hgrow="NEVER" maxWidth="90.0" prefWidth="90.0" />
+                           <ColumnConstraints hgrow="NEVER" maxWidth="90.0" prefWidth="90.0" />
+                           <ColumnConstraints hgrow="NEVER" maxWidth="90.0" prefWidth="90.0" />
+                           <ColumnConstraints hgrow="NEVER" maxWidth="90.0" prefWidth="90.0" />
+                           <ColumnConstraints hgrow="NEVER" maxWidth="90.0" prefWidth="90.0" />
+                       </columnConstraints>
+                       <rowConstraints>
+                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       </rowConstraints>
+                        <children>
+                           <VBox alignment="CENTER" maxHeight="80.0" maxWidth="100.0" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7)linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4;">
+                              <children>
+                                 <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../sprites/yukidarumon_sprite.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label text="Yukidarumon" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                           </VBox>
+                           <VBox alignment="CENTER" maxHeight="80.0" maxWidth="100.0" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7)linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4;" GridPane.columnIndex="1">
+                              <children>
+                                 <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../sprites/deathmon_sprite.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label text="Deathmon" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                           </VBox>
+                           <VBox alignment="CENTER" maxHeight="80.0" maxWidth="100.0" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7)linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4;" GridPane.columnIndex="2">
+                              <children>
+                                 <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../sprites/agumon_sprite.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label text="Agumon" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                           </VBox>
+                           <VBox alignment="CENTER" maxHeight="80.0" maxWidth="100.0" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7)linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4;" GridPane.columnIndex="3">
+                              <children>
+                                 <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../sprites/yukidarumon_sprite.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label text="Yukidarumon" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                           </VBox>
+                           <VBox alignment="CENTER" maxHeight="80.0" maxWidth="100.0" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7)linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4;" GridPane.columnIndex="4">
+                              <children>
+                                 <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../sprites/deathmon_sprite.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label text="Deathmon" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                           </VBox>
+                           <VBox alignment="CENTER" maxHeight="80.0" maxWidth="100.0" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7)linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4;" GridPane.columnIndex="5">
+                              <children>
+                                 <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../sprites/agumon_sprite.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label text="Agumon" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </padding>
+                           </VBox>
+                        </children>
+                     </GridPane>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </top>
    </BorderPane>
 </AnchorPane>
