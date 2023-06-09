@@ -2,8 +2,6 @@ package digimonbattlesimulator.team;
 
 import digimonbattlesimulator.digimon.Digimon;
 
-import java.util.List;
-
 public abstract class TeamBuilder implements TeamObserver {
     protected String name;
     protected int maxTeamSize;

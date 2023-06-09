@@ -1,28 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digimonbattlesimulator.controller.TeamOverviewController">
-   <BorderPane minHeight="600.0" minWidth="800.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+   <BorderPane AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <top>
-         <HBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="Team Overview" />
-         </HBox>
+          <VBox BorderPane.alignment="CENTER">
+              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                  <MFXButton onAction="#onClickBackToMainButton" text="Go back" />
+                  <Label text="Team Overview">
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Label>
+              </HBox>
+          </VBox>
       </top>
       <center>
-         <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="TOP_LEFT">
-             <HBox alignment="TOP_CENTER">
-                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All teams (0)" />
-             </HBox>
-             <HBox alignment="TOP_CENTER" spacing="10.0">
-                 <MFXButton text="New Team" />
-                 <MFXButton layoutX="372.0" layoutY="10.0" text="New Box" />
-             </HBox>
+         <VBox spacing="20.0" BorderPane.alignment="TOP_LEFT">
+            <VBox spacing="10.0">
+               <HBox>
+                 <Label fx:id="teamCount" text="All teams (0)">
+                    <font>
+                       <Font name="System Bold" size="18.0" />
+                    </font>
+                 </Label>
+               </HBox>
+               <HBox spacing="10.0">
+                   <MFXButton fx:id="newTeamButton" onAction="#onClickTeambuilderButton" style="-fx-font-size: 12; -fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #000;" text="New Team">
+                       <padding>
+                           <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                       </padding>
+                   </MFXButton>
+                   <MFXButton fx:id="newBoxButton" onAction="#onClickTeambuilderButton" style="-fx-font-size: 12; -fx-font-weight: 700; -fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #000;" text="New Box">
+                       <padding>
+                           <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                       </padding>
+                   </MFXButton>
+               </HBox>
+            </VBox>
+            <VBox maxWidth="405.0" style="-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;">
+                <HBox alignment="CENTER">
+                    <Label text="[Regular Team]">
+                        <font>
+                            <Font name="System Italic" size="12.0" />
+                        </font>
+                    </Label>
+                </HBox>
+                <HBox>
+                    <GridPane hgap="5.0" maxHeight="45.0" prefHeight="45.0">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="45.0" minWidth="45.0" />
+                        </columnConstraints>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../sprites/deathmon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                            <Image url="@../sprites/deathmon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                            <Image url="@../sprites/yukidarumon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="111.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                            <Image url="@../sprites/betamon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="161.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                            <Image url="@../sprites/betamon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="196.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+                            <Image url="@../sprites/betamon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="111.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+                            <Image url="@../sprites/yukidarumon_sprite.gif" />
+                        </ImageView>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="297.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
+                            <Image url="@../sprites/yukidarumon_sprite.gif" />
+                        </ImageView>
+                    </GridPane>
+                  </HBox>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
          </VBox>
       </center>
    </BorderPane>

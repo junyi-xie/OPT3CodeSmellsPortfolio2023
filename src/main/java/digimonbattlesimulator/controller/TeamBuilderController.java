@@ -6,7 +6,6 @@ import digimonbattlesimulator.digimon.Betamon;
 import digimonbattlesimulator.digimon.Birdramon;
 import digimonbattlesimulator.digimon.Deathmon;
 import digimonbattlesimulator.digimon.Yukidarumon;
-import digimonbattlesimulator.team.RegularTeamBuilder;
 import digimonbattlesimulator.team.Team;
 import digimonbattlesimulator.util.ShowScene;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -27,7 +26,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class TeamBuilderController implements Initializable {
     private BorderPane teamBuilderBorderPane;
     @FXML
     private Label labelTeamName;
-    private final Team digimonTeam = new Team(new RegularTeamBuilder("Test", 6));
+    public static Team digimonTeam = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,11 +53,18 @@ public class TeamBuilderController implements Initializable {
         // Add observer
         digimonTeam.addObserver(digimonTeam.getTeamBuilder());
 
+        // Initialize
+        updateTeamViewCell();
+        TeamOverviewController.teams.add(digimonTeam);
         labelTeamName.setText(digimonTeam.getTeamBuilder().getName());
     }
 
     public void onClickBackButton(ActionEvent actionEvent) {
-        ShowScene.switchScene((Stage) ((Node) actionEvent.getSource()).getScene().getWindow(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/Main.fxml")));
+        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamOverview.fxml")));
+    }
+
+    public void onClickOverviewDigimonButton(ActionEvent actionEvent) {
+        //TODO view digimon detail like attack techniques, typing, stats and ability
     }
 
     public void onClickAddDigimonButton(Digimon digimon) {
@@ -78,6 +83,11 @@ public class TeamBuilderController implements Initializable {
         VBox currentTeamViewContainer = (VBox) teamBuilderBorderPane.getTop();
         currentTeamViewContainer.getChildren().remove(1, currentTeamViewContainer.getChildren().size());
 
+        // Check if Digimon team is empty; if empty, add "you have no digimon lol" text
+        if (digimonTeam.getDigimonTeam().isEmpty()) {
+            currentTeamViewContainer.getChildren().add(new HBox(new Label("you have no digimon lol")));
+        }
+
         // Create a new GridPane for Digimon
         GridPane digimonTeamViewGridPane = new GridPane() {{
             setHgap(10);
@@ -87,13 +97,13 @@ public class TeamBuilderController implements Initializable {
             Digimon digimon = digimonTeam.getDigimonTeam().get(i);
 
             // Create column constraint
-            ColumnConstraints digimonColumn = makeColumn(90.0, 90.0, Priority.NEVER);
+            ColumnConstraints digimonColumn = makeColumn(87.5, 87.5, Priority.NEVER);
             digimonTeamViewGridPane.getColumnConstraints().add(digimonColumn);
 
             // Create VBox for Digimon
             VBox digimonVBox = new VBox() {{
                setAlignment(Pos.BOTTOM_CENTER);
-               setMaxSize(100.0, 200.0);
+               setMaxSize(97.5, 200.0);
                setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
             }};
 

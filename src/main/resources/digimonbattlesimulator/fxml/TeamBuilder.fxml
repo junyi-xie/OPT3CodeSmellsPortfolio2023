@@ -19,12 +19,9 @@
                <MFXButton onAction="#onClickBackButton" text="Go back" />
                <Label fx:id="labelTeamName">
                   <font>
-                     <Font size="36.0" />
+                     <Font size="40.0" />
                   </font>
                </Label>
-            </HBox>
-            <HBox>
-               <Label text="you have no digimon lol" />
             </HBox>
             <BorderPane.margin>
                <Insets bottom="20.0" />
