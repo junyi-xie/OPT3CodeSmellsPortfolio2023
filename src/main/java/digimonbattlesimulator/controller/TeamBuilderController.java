@@ -31,23 +31,20 @@ import java.util.ResourceBundle;
 public class TeamBuilderController implements Initializable {
     @FXML
     private BorderPane teamBuilderBorderPane;
-
-    private ObservableList<Digimon> addedDigimon = FXCollections.observableArrayList();
+    private final ObservableList<Digimon> addedDigimon = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Add all available Digimon to list
-        List<Digimon> digimonList = new ArrayList<>();
-        digimonList.add(new Agumon(100, 130, 80, 90));
-        digimonList.add(new Deathmon(65, 136, 94, 135));
-        digimonList.add(new Yukidarumon(101, 150, 100, 139));
-        createDigimonCell(digimonList);
+        List<Digimon> availableDigimon = new ArrayList<>();
+        availableDigimon.add(new Agumon(100, 130, 80, 90));
+        availableDigimon.add(new Deathmon(65, 136, 94, 135));
+        availableDigimon.add(new Yukidarumon(101, 150, 100, 139));
+        createDigimonCell(availableDigimon);
     }
 
     public void onClickBackButton(ActionEvent actionEvent) {
-        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/Main.fxml"));
-        ShowScene.switchScene(currentStage, loader);
+        ShowScene.switchScene((Stage) ((Node) actionEvent.getSource()).getScene().getWindow(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/Main.fxml")));
     }
 
     public void onClickAddDigimonButton(Digimon digimon) {
@@ -55,15 +52,13 @@ public class TeamBuilderController implements Initializable {
         updateTeamViewCell();
     }
 
-
     public void updateTeamViewCell() {
-
         // Get the current team view container and remove existing elements from index 1 and above
         VBox currentTeamViewContainer = (VBox) teamBuilderBorderPane.getTop();
         currentTeamViewContainer.getChildren().remove(1, currentTeamViewContainer.getChildren().size());
 
         // Create a new GridPane for Digimon
-        GridPane digimonViewGridPane = new GridPane() {{
+        GridPane digimonTeamViewGridPane = new GridPane() {{
             setHgap(10);
         }};
 
@@ -72,7 +67,7 @@ public class TeamBuilderController implements Initializable {
 
             // Create column constraint
             ColumnConstraints digimonColumn = makeColumn(90.0, 90.0, Priority.NEVER);
-            digimonViewGridPane.getColumnConstraints().add(digimonColumn);
+            digimonTeamViewGridPane.getColumnConstraints().add(digimonColumn);
 
             // Create VBox for Digimon
             VBox digimonVBox = new VBox() {{
@@ -86,73 +81,87 @@ public class TeamBuilderController implements Initializable {
             digimonVBox.setPadding(new Insets(5.0));
 
             // Add the Digimon VBox to digimonViewGridPane
-            digimonViewGridPane.add(digimonVBox, i, 0);
+            digimonTeamViewGridPane.add(digimonVBox, i, 0);
         }
 
-        // Set the new content of the team view container to the digimonViewGridPane wrapped in an HBox and update the top view
-        currentTeamViewContainer.getChildren().addAll(new HBox(digimonViewGridPane));
+        // Set the new content of the team view container to the digimonTeamViewGridPane wrapped in an HBox and update the top view
+        currentTeamViewContainer.getChildren().addAll(new HBox(digimonTeamViewGridPane));
         teamBuilderBorderPane.setTop(currentTeamViewContainer);
     }
 
     public void createDigimonCell(List<Digimon> digimonList) {
-
-        VBox test = (VBox) teamBuilderBorderPane.getCenter();
+        // Get the current digimon cell container
+        VBox currentDigimonCells = (VBox) teamBuilderBorderPane.getCenter();
 
         for (Digimon digimon : digimonList) {
-
-            GridPane gridPane = new GridPane() {{
+            // Create GridPane for each Digimon
+            GridPane digimonGridPane = new GridPane() {{
                 setPadding(new Insets(10));
                 setMinSize(10.0, 10.0);
                 setMaxSize(780.0, 50.0);
                 setHgap(10);
             }};
 
-            ColumnConstraints spriteColumn = makeColumn(50.0, 50.0, Priority.SOMETIMES);
-            ColumnConstraints nameColumn = makeColumn(10.0, null, Priority.ALWAYS);
-            ColumnConstraints typeColumn = makeColumn(100.0, null, Priority.SOMETIMES);
-            ColumnConstraints abilityColumn = makeColumn(100.0, null, Priority.SOMETIMES);
-            ColumnConstraints statsColumn = makeColumn(100.0, null, Priority.NEVER);
-            ColumnConstraints buttonColumn = makeColumn(10.0, null, Priority.SOMETIMES);
+            // Set up column constraints for the digimonGridPane
+            ColumnConstraints spriteColumn  = makeColumn(50.0, 50.0, Priority.SOMETIMES);
+            ColumnConstraints nameColumn    = makeColumn(10.0, null, Priority.ALWAYS);
+            ColumnConstraints typeColumn    = makeColumn(100.0, 100.0, Priority.SOMETIMES);
+            ColumnConstraints abilityColumn = makeColumn(100.0, 100.0, Priority.SOMETIMES);
+            ColumnConstraints statsColumn   = makeColumn(100.0, 100.0, Priority.NEVER);
+            ColumnConstraints buttonColumn  = makeColumn(10.0, 100.0, Priority.SOMETIMES);
 
-            gridPane.getColumnConstraints().addAll(spriteColumn, nameColumn, typeColumn, abilityColumn, statsColumn, buttonColumn);
+            // Add the column constraints to the digimonGridPane
+            digimonGridPane.getColumnConstraints().addAll(spriteColumn, nameColumn, typeColumn, abilityColumn, statsColumn, buttonColumn);
 
-            gridPane.add(loadSprite(digimon.getSpritePath()), 0, 0);
-            gridPane.add(new Label(digimon.getName()), 1, 0);
-            gridPane.add(new Label(digimon.getType().toString()), 2, 0);
-            gridPane.add(new Label(digimon.getAbility().toString()), 3, 0);
+            // Add digimon sprite, name, type, ability, stats, and add button to the digimonGridPane
+            digimonGridPane.add(loadSprite(digimon.getSpritePath()), 0, 0);
+            digimonGridPane.add(new Label(digimon.getName()), 1, 0);
+            digimonGridPane.add(new Label(digimon.getType().toString()), 2, 0);
+            digimonGridPane.add(new Label(digimon.getAbility().toString()), 3, 0);
+            digimonGridPane.add(createDigimonStatsGridPane(digimon), 4, 0);
+            digimonGridPane.add(createAddDigimonButton(digimon), 5, 0);
 
-            MFXButton addButton = new MFXButton("Add to team");
-
-            addButton.setOnAction(event -> onClickAddDigimonButton(digimon));
-
-            gridPane.add(addButton, 5, 0);
-
-
-            GridPane innerGridPane = new GridPane();
-
-            ColumnConstraints hpColumn = makeColumn(10.0, null, Priority.SOMETIMES);
-            ColumnConstraints atkColumn = makeColumn(10.0, null, Priority.SOMETIMES);
-            ColumnConstraints defColumn = makeColumn(10.0, null, Priority.SOMETIMES);
-            ColumnConstraints spdColumn = makeColumn(10.0, null, Priority.SOMETIMES);
-
-            innerGridPane.getColumnConstraints().addAll(hpColumn, atkColumn, defColumn, spdColumn);
-
-            VBox hpVBox = makeStatsVbox(new Label("HP"), new Text(digimon.getHitpoints()));
-            VBox atkVBox = makeStatsVbox(new Label("Atk"), new Text(digimon.getAttack()));
-            VBox defVBox = makeStatsVbox(new Label("Def"), new Text(digimon.getDefense()));
-            VBox spdVBox = makeStatsVbox(new Label("Spd"), new Text(digimon.getAgility()));
-
-            innerGridPane.add(hpVBox, 0, 0);
-            innerGridPane.add(atkVBox, 1, 0);
-            innerGridPane.add(defVBox, 2, 0);
-            innerGridPane.add(spdVBox, 3, 0);
-
-            gridPane.add(innerGridPane, 4, 0);
-
-            test.getChildren().add(gridPane);
+            // Add the digimonGridPane to the digimon cell container
+            currentDigimonCells.getChildren().add(digimonGridPane);
         }
 
-        teamBuilderBorderPane.setCenter(test);
+        // Update the center view of the BorderPane with the digimon cell container
+        teamBuilderBorderPane.setCenter(currentDigimonCells);
+    }
+
+    public GridPane createDigimonStatsGridPane(Digimon digimon) {
+        // Create a new GridPane to hold the stats of the Digimon
+        GridPane digimonStatsGridPane = new GridPane();
+
+        // Create column constraints for each Digimon stat column
+        ColumnConstraints hpColumn  = makeColumn(10.0, null, Priority.SOMETIMES);
+        ColumnConstraints atkColumn = makeColumn(10.0, null, Priority.SOMETIMES);
+        ColumnConstraints defColumn = makeColumn(10.0, null, Priority.SOMETIMES);
+        ColumnConstraints spdColumn = makeColumn(10.0, null, Priority.SOMETIMES);
+
+        // Add the column constraints to the digimonStatsGridPane
+        digimonStatsGridPane.getColumnConstraints().addAll(hpColumn, atkColumn, defColumn, spdColumn);
+
+        // Create VBox for each stat with corresponding label and value
+        VBox hpVBox  = makeStatsVbox(new Label("HP"), new Text(digimon.getHitpoints()));
+        VBox atkVBox = makeStatsVbox(new Label("Atk"), new Text(digimon.getAttack()));
+        VBox defVBox = makeStatsVbox(new Label("Def"), new Text(digimon.getDefense()));
+        VBox speVBox = makeStatsVbox(new Label("Spe"), new Text(digimon.getAgility()));
+
+        // Add the stat VBoxes to the digimonStatsGridPane
+        digimonStatsGridPane.add(hpVBox, 0, 0);
+        digimonStatsGridPane.add(atkVBox, 1, 0);
+        digimonStatsGridPane.add(defVBox, 2, 0);
+        digimonStatsGridPane.add(speVBox, 3, 0);
+
+        return digimonStatsGridPane;
+    }
+
+    public MFXButton createAddDigimonButton(Digimon digimon) {
+        MFXButton addDigimonButton = new MFXButton("Add to team");
+        addDigimonButton.setStyle("-fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
+        addDigimonButton.setOnAction(event -> onClickAddDigimonButton(digimon));
+        return addDigimonButton;
     }
 
     public ColumnConstraints makeColumn(Double minWidth, Double maxWidth, Priority hgrow) {

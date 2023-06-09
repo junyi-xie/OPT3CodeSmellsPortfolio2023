@@ -3,8 +3,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,17 +15,20 @@
    <BorderPane fx:id="teamBuilderBorderPane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <top>
          <VBox BorderPane.alignment="CENTER">
-            <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
                <MFXButton onAction="#onClickBackButton" text="Go back" />
-               <Label text="[Your team]">
+               <Label text="[Your team]"> <!--TODO Placeholder -->
                   <font>
                      <Font size="36.0" />
                   </font>
                </Label>
             </HBox>
             <HBox>
-               <Label text="you have no team lol" />
+               <Label text="you have no digimon lol" />
             </HBox>
+            <BorderPane.margin>
+               <Insets bottom="20.0" />
+            </BorderPane.margin>
          </VBox>
       </top>
       <center>
