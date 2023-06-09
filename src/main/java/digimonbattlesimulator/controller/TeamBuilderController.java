@@ -55,7 +55,12 @@ public class TeamBuilderController implements Initializable {
 
         // Initialize
         updateTeamViewCell();
-        TeamOverviewController.teams.add(digimonTeam);
+        //TODO fix causing duplicates
+
+        if (!TeamOverviewController.teams.contains(digimonTeam)) {
+            TeamOverviewController.teams.add(digimonTeam);
+        }
+
         labelTeamName.setText(digimonTeam.getTeamBuilder().getName());
     }
 
