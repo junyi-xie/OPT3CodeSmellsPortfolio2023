@@ -8,17 +8,22 @@ public class Agumon extends Digimon {
     }
 
     @Override
-    protected String getName() {
+    public String getName() {
         return "Agumon";
     }
 
     @Override
-    protected Ability getAbility() {
+    public String getSpritePath() {
+        return "/digimonbattlesimulator/sprites/agumon_sprite.png";
+    }
+
+    @Override
+    public Ability getAbility() {
         return Ability.BLAZE;
     }
 
     @Override
-    protected Type getType() {
+    public Type getType() {
         return Type.ICE;
     }
 

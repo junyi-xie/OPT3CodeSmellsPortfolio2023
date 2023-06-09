@@ -40,11 +40,29 @@ public abstract class Digimon {
         System.out.println();
     }
 
-    protected abstract String getName();
+    public String getHitpoints() {
+        return Integer.toString(hitpoints);
+    }
 
-    protected abstract Ability getAbility();
+    public String getAttack() {
+        return Integer.toString(attack);
+    }
 
-    protected abstract Type getType();
+    public String getDefense() {
+        return Integer.toString(defense);
+    }
+
+    public String getAgility() {
+        return Integer.toString(agility);
+    }
+
+    public abstract String getName();
+
+    public abstract String getSpritePath();
+
+    public abstract Ability getAbility();
+
+    public abstract Type getType();
 
     protected abstract List<AttackTechnique> createAttackTechniques();
 }

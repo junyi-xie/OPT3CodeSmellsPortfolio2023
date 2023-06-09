@@ -8,17 +8,22 @@ public class Yukidarumon extends Digimon {
     }
 
     @Override
-    protected String getName() {
+    public String getName() {
         return "Yukidarumon";
     }
 
     @Override
-    protected Ability getAbility() {
+    public String getSpritePath() {
+        return "/digimonbattlesimulator/sprites/yukidarumon_sprite.png";
+    }
+
+    @Override
+    public Ability getAbility() {
         return Ability.TORRENT;
     }
 
     @Override
-    protected Type getType() {
+    public Type getType() {
         return Type.ICE;
     }
 
