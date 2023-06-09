@@ -14,7 +14,7 @@ public class Deathmon extends Digimon {
 
     @Override
     public String getSpritePath() {
-        return "/digimonbattlesimulator/sprites/deathmon_sprite.png";
+        return "/digimonbattlesimulator/sprites/deathmon_sprite.gif";
     }
 
     @Override

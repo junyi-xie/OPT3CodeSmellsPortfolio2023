@@ -14,6 +14,7 @@ public class Agumon extends Digimon {
 
     @Override
     public String getSpritePath() {
+        // return "/digimonbattlesimulator/sprites/agumon_sprite.gif";
         return "/digimonbattlesimulator/sprites/agumon_sprite.png";
     }
 

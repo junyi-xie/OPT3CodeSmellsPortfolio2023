@@ -1,13 +1,15 @@
 package digimonbattlesimulator.controller;
 
-import digimonbattlesimulator.util.ShowScene;
-import digimonbattlesimulator.digimon.Agumon;
-import digimonbattlesimulator.digimon.Deathmon;
 import digimonbattlesimulator.digimon.Digimon;
+import digimonbattlesimulator.digimon.Agumon;
+import digimonbattlesimulator.digimon.Betamon;
+import digimonbattlesimulator.digimon.Birdramon;
+import digimonbattlesimulator.digimon.Deathmon;
 import digimonbattlesimulator.digimon.Yukidarumon;
+import digimonbattlesimulator.team.RegularTeamBuilder;
+import digimonbattlesimulator.team.Team;
+import digimonbattlesimulator.util.ShowScene;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +20,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,7 +38,9 @@ import java.util.ResourceBundle;
 public class TeamBuilderController implements Initializable {
     @FXML
     private BorderPane teamBuilderBorderPane;
-    private final ObservableList<Digimon> addedDigimon = FXCollections.observableArrayList();
+    @FXML
+    private Label labelTeamName;
+    private final Team digimonTeam = new Team(new RegularTeamBuilder("Test", 6));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,7 +49,13 @@ public class TeamBuilderController implements Initializable {
         availableDigimon.add(new Agumon(100, 130, 80, 90));
         availableDigimon.add(new Deathmon(65, 136, 94, 135));
         availableDigimon.add(new Yukidarumon(101, 150, 100, 139));
+        availableDigimon.add(new Birdramon(85, 170, 50, 125));
+        availableDigimon.add(new Betamon(73, 97, 150, 120));
         createDigimonCell(availableDigimon);
+        // Add observer
+        digimonTeam.addObserver(digimonTeam.getTeamBuilder());
+
+        labelTeamName.setText(digimonTeam.getTeamBuilder().getName());
     }
 
     public void onClickBackButton(ActionEvent actionEvent) {
@@ -48,7 +63,13 @@ public class TeamBuilderController implements Initializable {
     }
 
     public void onClickAddDigimonButton(Digimon digimon) {
-        addedDigimon.add(digimon);
+        if (digimonTeam.getDigimonTeam().size() >= digimonTeam.getTeamBuilder().getMaxTeamSize()) return;
+        digimonTeam.addDigimon(digimon);
+        updateTeamViewCell();
+    }
+
+    public void onClickRemoveDigimonButton(Digimon digimon) {
+        digimonTeam.removeDigimon(digimon);
         updateTeamViewCell();
     }
 
@@ -62,8 +83,8 @@ public class TeamBuilderController implements Initializable {
             setHgap(10);
         }};
 
-        for (int i = 0; i < addedDigimon.size(); i++) {
-            Digimon digimon = addedDigimon.get(i);
+        for (int i = 0; i < digimonTeam.getDigimonTeam().size(); i++) {
+            Digimon digimon = digimonTeam.getDigimonTeam().get(i);
 
             // Create column constraint
             ColumnConstraints digimonColumn = makeColumn(90.0, 90.0, Priority.NEVER);
@@ -72,12 +93,12 @@ public class TeamBuilderController implements Initializable {
             // Create VBox for Digimon
             VBox digimonVBox = new VBox() {{
                setAlignment(Pos.BOTTOM_CENTER);
-               setMaxSize(100.0, 80.0);
+               setMaxSize(100.0, 200.0);
                setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
             }};
 
             // Add Digimon sprite and name label
-            digimonVBox.getChildren().addAll(loadSprite(digimon.getSpritePath()), new Label(digimon.getName()));
+            digimonVBox.getChildren().addAll(createRemoveDigimonButton(digimon), loadSprite(digimon.getSpritePath()), new Label(digimon.getName()));
             digimonVBox.setPadding(new Insets(5.0));
 
             // Add the Digimon VBox to digimonViewGridPane
@@ -162,6 +183,12 @@ public class TeamBuilderController implements Initializable {
         addDigimonButton.setStyle("-fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
         addDigimonButton.setOnAction(event -> onClickAddDigimonButton(digimon));
         return addDigimonButton;
+    }
+
+    public MFXButton createRemoveDigimonButton(Digimon digimon) {
+        MFXButton removeDigimonButton = new MFXButton("Remove");
+        removeDigimonButton.setOnAction(event -> onClickRemoveDigimonButton(digimon));
+        return removeDigimonButton;
     }
 
     public ColumnConstraints makeColumn(Double minWidth, Double maxWidth, Priority hgrow) {

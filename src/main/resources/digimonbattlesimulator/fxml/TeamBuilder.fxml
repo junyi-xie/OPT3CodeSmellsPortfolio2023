@@ -17,7 +17,7 @@
          <VBox BorderPane.alignment="CENTER">
             <HBox alignment="CENTER_LEFT" spacing="15.0">
                <MFXButton onAction="#onClickBackButton" text="Go back" />
-               <Label text="[Your team]"> <!--TODO Placeholder -->
+               <Label fx:id="labelTeamName">
                   <font>
                      <Font size="36.0" />
                   </font>

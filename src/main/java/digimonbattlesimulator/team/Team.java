@@ -1,40 +1,42 @@
 package digimonbattlesimulator.team;
 
 import digimonbattlesimulator.digimon.Digimon;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class Team {
-    private final List<Digimon> digimonTeam;
-
+public class Team {
+    private final ObservableList<Digimon> digimonTeam;
     private final List<TeamObserver> observers;
-
+    private final TeamBuilder teamBuilder;
     private boolean isDigimonAdded;
 
-    public Team() {
-        digimonTeam = new ArrayList<>();
+    public Team(TeamBuilder teamBuilder) {
+        digimonTeam = FXCollections.observableArrayList();
         observers = new ArrayList<>();
+        this.teamBuilder = teamBuilder;
     }
 
     public void addDigimon(Digimon digimon) {
         digimonTeam.add(digimon);
         isDigimonAdded = true;
-        notifyObservers();
+        notifyObservers(digimon);
     }
 
     public void removeDigimon(Digimon digimon) {
         digimonTeam.remove(digimon);
         isDigimonAdded = false;
-        notifyObservers();
+        notifyObservers(digimon);
     }
 
-    public int getTeamSize() {
-        return digimonTeam.size();
+    public ObservableList<Digimon> getDigimonTeam() {
+        return digimonTeam;
     }
 
-    public void printTeam() {
-        System.out.println("Teamopstelling:");
+    public TeamBuilder getTeamBuilder() {
+        return teamBuilder;
     }
 
     public void addObserver(TeamObserver observer) {
@@ -45,9 +47,9 @@ class Team {
         observers.remove(observer);
     }
 
-    private void notifyObservers() {
+    private void notifyObservers(Digimon digimon) {
         for (TeamObserver observer : observers) {
-            observer.update(digimonTeam, isDigimonAdded);
+            observer.update(digimon, isDigimonAdded);
         }
     }
 }
