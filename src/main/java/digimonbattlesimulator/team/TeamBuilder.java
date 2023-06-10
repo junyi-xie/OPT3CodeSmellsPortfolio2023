@@ -3,11 +3,11 @@ package digimonbattlesimulator.team;
 import digimonbattlesimulator.digimon.Digimon;
 
 public abstract class TeamBuilder implements TeamObserver {
-    protected String name;
+    protected String teamName;
     protected int maxTeamSize;
 
-    public TeamBuilder(String name, int maxTeamSize) {
-        this.name = name;
+    public TeamBuilder(String teamName, int maxTeamSize) {
+        this.teamName = teamName;
         this.maxTeamSize = maxTeamSize;
     }
 
@@ -18,11 +18,10 @@ public abstract class TeamBuilder implements TeamObserver {
         } else {
             System.out.println(digimon.getName() + " has been removed from the team");
         }
-        // TODO something like alert that digimon has been added or removed
     }
 
-    public String getName() {
-        return name;
+    public String getTeamName() {
+        return teamName;
     }
 
     public int getMaxTeamSize() {

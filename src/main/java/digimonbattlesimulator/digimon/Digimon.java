@@ -21,8 +21,6 @@ public abstract class Digimon {
         this.attackTechniques = createAttackTechniques();
     }
 
-    //TODO attacktechnique
-
     public String getHitpoints() {
         return Integer.toString(hitpoints);
     }
@@ -39,7 +37,13 @@ public abstract class Digimon {
         return Integer.toString(agility);
     }
 
+    public List<AttackTechnique> getAttackTechniques() {
+        return attackTechniques;
+    }
+
     public abstract String getName();
+
+    public abstract String getCharacteristic();
 
     public abstract String getSpritePath();
 

@@ -70,7 +70,7 @@ public class TeamOverviewController implements Initializable {
 
             // Create team name label
             Label teamNameLabel = new Label();
-            teamNameLabel.setText("[" + team.getTeamBuilder().getName() + "]");
+            teamNameLabel.setText("[" + team.getTeamBuilder().getTeamName() + "]");
             teamNameLabel.setFont(new Font("System Italic", 12.0));
 
             // Create an HBox for the team name label with center alignment and add team name label
@@ -91,7 +91,7 @@ public class TeamOverviewController implements Initializable {
 
             // Add Digimon sprite to sprite GridPane
             for (int i = 0; i < team.getDigimonTeam().size(); i++) {
-                spriteGridPane.add(LayoutUtils.createSpriteImageView(team.getDigimonTeam().get(i).getSpritePath()), i, 0);
+                spriteGridPane.add(LayoutUtils.createImageView(team.getDigimonTeam().get(i).getSpritePath(), 45.0, 45.0, true), i, 0);
             }
 
             // Create an HBox to wrap the SpriteGridPane
@@ -114,14 +114,6 @@ public class TeamOverviewController implements Initializable {
         // Set the new content of the team overview container to the 'digimonTeamViewGridPane' wrapped in an VBox and update the center view
         currentTeamOverviewContainer.getChildren().addAll(allTeamsVBox);
         teamOverviewBorderPane.setCenter(currentTeamOverviewContainer);
-    }
-
-    public MFXButton createDeleteTeamButton(Team team) {
-        MFXButton deleteTeamButton = new MFXButton("Delete team");
-        deleteTeamButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
-        deleteTeamButton.setPadding(new Insets(5.0, 12.5, 5.0, 12.5));
-        deleteTeamButton.setOnAction(event -> onClickRemoveTeamButton(team));
-        return deleteTeamButton;
     }
 
     public void onClickBackToMainButton(ActionEvent actionEvent) {
@@ -154,5 +146,13 @@ public class TeamOverviewController implements Initializable {
     public void onClickRemoveTeamButton(Team team) {
         teams.remove(team);
         updateTeamOverview();
+    }
+
+    public MFXButton createDeleteTeamButton(Team team) {
+        MFXButton deleteTeamButton = new MFXButton("Delete team");
+        deleteTeamButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
+        deleteTeamButton.setPadding(new Insets(5.0, 12.5, 5.0, 12.5));
+        deleteTeamButton.setOnAction(event -> onClickRemoveTeamButton(team));
+        return deleteTeamButton;
     }
 }

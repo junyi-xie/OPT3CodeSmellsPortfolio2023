@@ -1,11 +1,6 @@
 package digimonbattlesimulator.controller;
 
-import digimonbattlesimulator.digimon.Digimon;
-import digimonbattlesimulator.digimon.Agumon;
-import digimonbattlesimulator.digimon.Betamon;
-import digimonbattlesimulator.digimon.Birdramon;
-import digimonbattlesimulator.digimon.Deathmon;
-import digimonbattlesimulator.digimon.Yukidarumon;
+import digimonbattlesimulator.digimon.*;
 import digimonbattlesimulator.team.Team;
 import digimonbattlesimulator.utils.ShowScene;
 import digimonbattlesimulator.utils.layout.LayoutUtils;
@@ -19,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -43,6 +39,7 @@ public class TeamBuilderController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Add all available Digimon to list
         List<Digimon> availableDigimon = new ArrayList<>();
+        availableDigimon.add(new Herta(92, 78, 150, 190));
         availableDigimon.add(new Agumon(100, 130, 80, 90));
         availableDigimon.add(new Deathmon(65, 136, 94, 135));
         availableDigimon.add(new Yukidarumon(101, 150, 100, 139));
@@ -57,8 +54,8 @@ public class TeamBuilderController implements Initializable {
         VBox currentTeamViewContainer = (VBox) teamBuilderBorderPane.getTop();
         currentTeamViewContainer.getChildren().remove(1, currentTeamViewContainer.getChildren().size());
 
-        // Set team name
-        labelTeamName.setText(digimonTeam.getTeamBuilder().getName());
+        // Set the label text to the team name from the team builder
+        labelTeamName.setText(digimonTeam.getTeamBuilder().getTeamName());
 
         // Check if Digimon team is empty; if empty, add "you have no digimon lol" text
         if (digimonTeam.getDigimonTeam().isEmpty()) {
@@ -82,9 +79,10 @@ public class TeamBuilderController implements Initializable {
             digimonVBox.setMaxSize(87.5, 200.0);
             digimonVBox.setPadding(new Insets(5.0));
             digimonVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
+            digimonVBox.setOnMouseClicked(event -> onClickOverviewDigimonButton(event, digimon));
 
             // Add Digimon sprite and name label
-            digimonVBox.getChildren().addAll(createRemoveDigimonButton(digimon), LayoutUtils.createSpriteImageView(digimon.getSpritePath()), new Label(digimon.getName()));
+            digimonVBox.getChildren().addAll(LayoutUtils.createImageView(digimon.getSpritePath(), 45.0, 45.0, true), new Label(digimon.getName()));
 
             // Add the Digimon VBox to digimonViewGridPane
             digimonTeamViewGridPane.add(digimonVBox, i, 0);
@@ -101,7 +99,7 @@ public class TeamBuilderController implements Initializable {
 
         for (Digimon digimon : digimonList) {
             // Set up column constraints for the digimonGridPane
-            ColumnConstraints spriteColumn  = LayoutUtils.createColumn(50.0, 50.0, Priority.SOMETIMES, HPos.LEFT);
+            ColumnConstraints spriteColumn  = LayoutUtils.createColumn(50.0, 50.0, Priority.SOMETIMES, HPos.CENTER);
             ColumnConstraints nameColumn    = LayoutUtils.createColumn(10.0, null, Priority.ALWAYS, HPos.LEFT);
             ColumnConstraints typeColumn    = LayoutUtils.createColumn(80.0, 80.0, Priority.NEVER, HPos.LEFT);
             ColumnConstraints abilityColumn = LayoutUtils.createColumn(90.0, 90.0, Priority.NEVER, HPos.LEFT);
@@ -115,7 +113,7 @@ public class TeamBuilderController implements Initializable {
             digimonGridPane.setHgap(10);
 
             // Add digimon sprite, name, type, ability, stats, and add button to the digimonGridPane
-            digimonGridPane.add(LayoutUtils.createSpriteImageView(digimon.getSpritePath()), 0, 0);
+            digimonGridPane.add(LayoutUtils.createImageView(digimon.getSpritePath(), 45.0, 45.0, true), 0, 0);
             digimonGridPane.add(new Label(digimon.getName()), 1, 0);
             digimonGridPane.add(new Label(digimon.getType().toString()), 2, 0);
             digimonGridPane.add(new Label(digimon.getAbility().toString()), 3, 0);
@@ -160,22 +158,14 @@ public class TeamBuilderController implements Initializable {
         ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamOverview.fxml")));
     }
 
-    //TODO view digimon detail like attack techniques, typing, stats and ability
-    public void onClickOverviewDigimonButton(ActionEvent actionEvent) {
-
-        // Set the selected digimon
-
-        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/DigimonOverview.fxml")));
+    public void onClickOverviewDigimonButton(MouseEvent mouseEvent, Digimon digimon) {
+        DigimonOverviewController.selectedDigimon = digimon;
+        ShowScene.switchScene((BorderPane) ((Node) mouseEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/DigimonOverview.fxml")));
     }
 
     public void onClickAddDigimonButton(Digimon digimon) {
         if (digimonTeam.getDigimonTeam().size() >= digimonTeam.getTeamBuilder().getMaxTeamSize()) return;
         digimonTeam.addDigimon(digimon);
-        updateTeamViewCell();
-    }
-
-    public void onClickRemoveDigimonButton(Digimon digimon) {
-        digimonTeam.removeDigimon(digimon);
         updateTeamViewCell();
     }
 
@@ -185,11 +175,5 @@ public class TeamBuilderController implements Initializable {
         addDigimonButton.setPadding(new Insets(5.0, 12.5, 5.0, 12.5));
         addDigimonButton.setOnAction(event -> onClickAddDigimonButton(digimon));
         return addDigimonButton;
-    }
-
-    public MFXButton createRemoveDigimonButton(Digimon digimon) {
-        MFXButton removeDigimonButton = new MFXButton("Remove");
-        removeDigimonButton.setOnAction(event -> onClickRemoveDigimonButton(digimon));
-        return removeDigimonButton;
     }
 }

@@ -28,13 +28,13 @@ public class LayoutUtils {
         return column;
     }
 
-    public static ImageView createSpriteImageView(String spritePath) {
-        ImageView sprite = new ImageView();
-        sprite.setFitWidth(45.0);
-        sprite.setFitHeight(45.0);
-        sprite.setPreserveRatio(true);
-        sprite.setImage(new Image(Objects.requireNonNull(LayoutUtils.class.getResource(spritePath)).toExternalForm()));
-        return sprite;
+    public static ImageView createImageView(String path, double width, double height, boolean preserveRatio) {
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setPreserveRatio(preserveRatio);
+        imageView.setImage(new Image(Objects.requireNonNull(LayoutUtils.class.getResource(path)).toExternalForm()));
+        return imageView;
     }
 
     public static VBox createStatsVbox(Label label, Text text) {
