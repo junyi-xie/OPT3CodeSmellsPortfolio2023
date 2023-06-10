@@ -43,73 +43,105 @@ public class TeamOverviewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        teamCount.setText("All teams (" + teams.size() + ")");
-
-        loadTeams();
+        updateTeamOverview();
     }
 
-    //TODO fix all the variables names and make it better
-    public void loadTeams() {
+    public void updateTeamOverview() {
+        // Get the current team overview container and remove existing elements from index 1 and above
+        VBox currentTeamOverviewContainer = (VBox) teamOverviewBorderPane.getCenter();
+        currentTeamOverviewContainer.getChildren().remove(1, currentTeamOverviewContainer.getChildren().size());
 
-        VBox t = (VBox) teamOverviewBorderPane.getCenter();
-        t.getChildren().remove(1, t.getChildren().size());
+        // Set team count
+        teamCount.setText("All teams (" + teams.size() + ")");
 
+        // Check if teams is empty; if empty, add "you have no team lol" text
         if (teams.isEmpty()) {
-            t.getChildren().add(new HBox(new Label("you have no team lol")));
+            currentTeamOverviewContainer.getChildren().add(new HBox(new Label("you have no team lol")));
         }
 
-        VBox aa = new VBox();
-        aa.setSpacing(5.0);
+        // Create a container to hold all team VBoxes with vertical spacing
+        VBox allTeamsVBox = new VBox();
+        allTeamsVBox.setSpacing(5.0);
 
         for (Team team : teams) {
-            // Create VBox with properties
-            VBox vBox = new VBox();
-            vBox.setMaxWidth(405.0);
-            vBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;");
+            // Create VBox for each team
+            VBox singleTeamVBox = new VBox();
+            singleTeamVBox.setMaxWidth(405.0);
+            singleTeamVBox.setPadding(new Insets(5.0));
+            singleTeamVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;");
+            singleTeamVBox.setOnMouseClicked(event -> onClickLoadTeamButton(event, team));
 
-            vBox.setOnMouseClicked(event -> onClickLoadTeamButton(event, team));
+            // Create team name label
+            Label teamNameLabel = new Label();
+            teamNameLabel.setText("[" + team.getTeamBuilder().getName() + "]");
+            teamNameLabel.setFont(new Font("System Italic", 12.0));
 
+            // Create an HBox for the team name label with center alignment and add team name label
+            HBox teamNameLabelHBox = new HBox();
+            teamNameLabelHBox.setAlignment(Pos.CENTER);
+            teamNameLabelHBox.getChildren().add(teamNameLabel);
 
-            // Create HBox for "Regular Team" label
-            HBox labelHBox = new HBox();
-            labelHBox.setAlignment(Pos.CENTER);
-            Label label = new Label("[" + team.getTeamBuilder().getName() + "]");
-            label.setFont(new Font("System Italic", 12.0));
-            labelHBox.getChildren().add(label);
+            // Create GridPane for digimon sprites
+            GridPane spriteGridPane = new GridPane();
+            spriteGridPane.setHgap(5.0);
+            spriteGridPane.setMaxHeight(45.0);
+            spriteGridPane.setPrefHeight(45.0);
 
-            // Create GridPane for images
-            GridPane gridPane = new GridPane();
-            gridPane.setHgap(5.0);
-            gridPane.setMaxHeight(45.0);
-            gridPane.setPrefHeight(45.0);
-
-            // Create column constraints
+            // Create column constraints to accommodate all possible Digimon in a single team container
             for (int i = 0; i < 8; i++) {
-                gridPane.getColumnConstraints().add(makeColumn(45.0, 45.0, Priority.NEVER, HPos.CENTER));
+                spriteGridPane.getColumnConstraints().add(makeColumn(45.0, 45.0, Priority.NEVER, HPos.CENTER));
             }
 
+            // Add Digimon sprite to sprite GridPane
             for (int i = 0; i < team.getDigimonTeam().size(); i++) {
-                // Create ImageViews and add them to the GridPane
-                gridPane.add(loadSprite(team.getDigimonTeam().get(i).getSpritePath()), i, 0);
+                spriteGridPane.add(loadSprite(team.getDigimonTeam().get(i).getSpritePath()), i, 0);
             }
 
-            // Create HBox for GridPane
-            HBox gridPaneHBox = new HBox();
-            gridPaneHBox.getChildren().add(gridPane);
+            // Create an HBox to wrap the SpriteGridPane
+            HBox spriteGridPaneHBox = new HBox();
+            spriteGridPaneHBox.getChildren().add(spriteGridPane);
 
-            // Set padding for VBox
-            vBox.setPadding(new Insets(5.0));
+            // Add Team name label and Digimon sprite HBox
+            singleTeamVBox.getChildren().addAll(teamNameLabelHBox, spriteGridPaneHBox);
 
-            // Add children to VBox
-            vBox.getChildren().addAll(labelHBox, gridPaneHBox);
-
-            aa.getChildren().add(vBox);
+            // All the single team VBox to all teams VBox so we can apply padding
+            allTeamsVBox.getChildren().add(singleTeamVBox);
         }
 
+        // Set the new content of the team overview container to the 'digimonTeamViewGridPane' wrapped in an VBox and update the center view
+        currentTeamOverviewContainer.getChildren().addAll(allTeamsVBox);
+        teamOverviewBorderPane.setCenter(currentTeamOverviewContainer);
+    }
 
-        t.getChildren().addAll(aa);
+    public void onClickBackToMainButton(ActionEvent actionEvent) {
+        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/Main.fxml")));
+    }
 
-        teamOverviewBorderPane.setCenter(t);
+    public void onClickTeambuilderButton(ActionEvent actionEvent) {
+        Object source = actionEvent.getSource();
+
+        if (source == newTeamButton) {
+            TeamBuilderController.digimonTeam = TeamBuilderFactory.createRegularTeam("Regular Team", 4);
+        } else if (source == newBoxButton) {
+            TeamBuilderController.digimonTeam = TeamBuilderFactory.createCustomTeam("Custom Team", 8);
+        }
+
+        // Add observer
+        TeamBuilderController.digimonTeam.addObserver(TeamBuilderController.digimonTeam.getTeamBuilder());
+
+        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml")));
+    }
+
+    public void onClickLoadTeamButton(MouseEvent mouseEvent, Team team) {
+        TeamBuilderController.digimonTeam = team;
+        TeamBuilderController.digimonTeam.removeObserver(TeamBuilderController.digimonTeam.getTeamBuilder());
+        TeamBuilderController.digimonTeam.addObserver(TeamBuilderController.digimonTeam.getTeamBuilder());
+
+        ShowScene.switchScene((BorderPane) ((Node) mouseEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml")));
+    }
+
+    public void onClickRemoveTeamButton(ActionEvent actionEvent) {
+        //TODO delete team from team overview screen
     }
 
 
@@ -130,29 +162,5 @@ public class TeamOverviewController implements Initializable {
         column.setHgrow(hgrow);
         column.setHalignment(halignment);
         return column;
-    }
-
-    public void onClickBackToMainButton(ActionEvent actionEvent) {
-        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/Main.fxml")));
-    }
-
-    public void onClickTeambuilderButton(ActionEvent actionEvent) {
-        Object source = actionEvent.getSource();
-
-        if (source == newTeamButton) {
-            TeamBuilderController.digimonTeam = TeamBuilderFactory.createRegularTeam("Regular Team", 4);
-        } else if (source == newBoxButton) {
-            TeamBuilderController.digimonTeam = TeamBuilderFactory.createCustomTeam("Custom Team", 8);
-        }
-
-        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml")));
-    }
-
-    public void onClickLoadTeamButton(MouseEvent actionEvent, Team team) {
-
-        //TODO fix bug
-        TeamBuilderController.digimonTeam = team;
-
-        ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml")));
     }
 }

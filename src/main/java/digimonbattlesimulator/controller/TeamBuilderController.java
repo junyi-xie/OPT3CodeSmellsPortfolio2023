@@ -50,21 +50,11 @@ public class TeamBuilderController implements Initializable {
         availableDigimon.add(new Birdramon(85, 170, 50, 125));
         availableDigimon.add(new Betamon(73, 97, 150, 120));
         createDigimonCell(availableDigimon);
-        // Add observer
-        digimonTeam.addObserver(digimonTeam.getTeamBuilder());
-
-        // Initialize
         updateTeamViewCell();
-        //TODO fix causing duplicates
-
-        if (!TeamOverviewController.teams.contains(digimonTeam)) {
-            TeamOverviewController.teams.add(digimonTeam);
-        }
-
-        labelTeamName.setText(digimonTeam.getTeamBuilder().getName());
     }
 
     public void onClickBackButton(ActionEvent actionEvent) {
+        if (!TeamOverviewController.teams.contains(digimonTeam)) TeamOverviewController.teams.add(digimonTeam);
         ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamOverview.fxml")));
     }
 
@@ -88,15 +78,17 @@ public class TeamBuilderController implements Initializable {
         VBox currentTeamViewContainer = (VBox) teamBuilderBorderPane.getTop();
         currentTeamViewContainer.getChildren().remove(1, currentTeamViewContainer.getChildren().size());
 
+        // Set team name
+        labelTeamName.setText(digimonTeam.getTeamBuilder().getName());
+
         // Check if Digimon team is empty; if empty, add "you have no digimon lol" text
         if (digimonTeam.getDigimonTeam().isEmpty()) {
             currentTeamViewContainer.getChildren().add(new HBox(new Label("you have no digimon lol")));
         }
 
         // Create a new GridPane for Digimon
-        GridPane digimonTeamViewGridPane = new GridPane() {{
-            setHgap(10);
-        }};
+        GridPane digimonTeamViewGridPane = new GridPane();
+        digimonTeamViewGridPane.setHgap(10);
 
         for (int i = 0; i < digimonTeam.getDigimonTeam().size(); i++) {
             Digimon digimon = digimonTeam.getDigimonTeam().get(i);
@@ -106,15 +98,14 @@ public class TeamBuilderController implements Initializable {
             digimonTeamViewGridPane.getColumnConstraints().add(digimonColumn);
 
             // Create VBox for Digimon
-            VBox digimonVBox = new VBox() {{
-               setAlignment(Pos.BOTTOM_CENTER);
-               setMaxSize(97.5, 200.0);
-               setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
-            }};
+            VBox digimonVBox = new VBox();
+            digimonVBox.setAlignment(Pos.BOTTOM_CENTER);
+            digimonVBox.setMaxSize(97.5, 200.0);
+            digimonVBox.setPadding(new Insets(5.0));
+            digimonVBox.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
 
             // Add Digimon sprite and name label
             digimonVBox.getChildren().addAll(createRemoveDigimonButton(digimon), loadSprite(digimon.getSpritePath()), new Label(digimon.getName()));
-            digimonVBox.setPadding(new Insets(5.0));
 
             // Add the Digimon VBox to digimonViewGridPane
             digimonTeamViewGridPane.add(digimonVBox, i, 0);
@@ -131,12 +122,11 @@ public class TeamBuilderController implements Initializable {
 
         for (Digimon digimon : digimonList) {
             // Create GridPane for each Digimon
-            GridPane digimonGridPane = new GridPane() {{
-                setPadding(new Insets(10));
-                setMinSize(10.0, 10.0);
-                setMaxSize(780.0, 50.0);
-                setHgap(10);
-            }};
+            GridPane digimonGridPane = new GridPane();
+            digimonGridPane.setMinSize(10.0, 10.0);
+            digimonGridPane.setMaxSize(780.0, 50.0);
+            digimonGridPane.setPadding(new Insets(10));
+            digimonGridPane.setHgap(10);
 
             // Set up column constraints for the digimonGridPane
             ColumnConstraints spriteColumn  = makeColumn(50.0, 50.0, Priority.SOMETIMES);
@@ -193,6 +183,8 @@ public class TeamBuilderController implements Initializable {
         return digimonStatsGridPane;
     }
 
+
+    //TODO do something about all the method below
     public MFXButton createAddDigimonButton(Digimon digimon) {
         MFXButton addDigimonButton = new MFXButton("Add to team");
         addDigimonButton.setStyle("-fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
