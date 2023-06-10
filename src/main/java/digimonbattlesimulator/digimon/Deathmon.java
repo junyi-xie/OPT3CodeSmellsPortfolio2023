@@ -13,7 +13,7 @@ public class Deathmon extends Digimon {
     }
 
     @Override
-    public String getCharacteristic() { return "Digital World Grim Reaper"; }
+    public String getCharacteristic() { return "Grim Reaper of the Digital Word"; }
 
     @Override
     public String getSpritePath() {

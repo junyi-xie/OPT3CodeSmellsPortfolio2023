@@ -40,22 +40,22 @@
                </columnConstraints>
                <Label text="Digimon" GridPane.columnIndex="0">
                   <font>
-                     <Font name="System Bold" size="18.0" />
+                     <Font name="System Bold" size="16.0" />
                   </font>
                </Label>
                <Label text="Type" GridPane.columnIndex="1">
                   <font>
-                     <Font name="System Bold" size="18.0" />
+                     <Font name="System Bold" size="16.0" />
                   </font>
                </Label>
                <Label text="Ability" GridPane.columnIndex="2">
                   <font>
-                     <Font name="System Bold" size="18.0" />
+                     <Font name="System Bold" size="16.0" />
                   </font>
                </Label>
                <Label text="Stats" GridPane.columnIndex="3">
                   <font>
-                     <Font name="System Bold" size="18.0" />
+                     <Font name="System Bold" size="16.0" />
                   </font>
                </Label>
             </GridPane>

@@ -77,9 +77,9 @@ public class DigimonOverviewController implements Initializable {
         for (AttackTechnique attackTechnique : selectedDigimon.getAttackTechniques()) {
 
             ColumnConstraints iconColumn        = LayoutUtils.createColumn(10.0, null, Priority.NEVER, HPos.LEFT);
-            ColumnConstraints nameColumn        = LayoutUtils.createColumn(150.0, 150.0, Priority.SOMETIMES, HPos.LEFT);
-            ColumnConstraints typeColumn        = LayoutUtils.createColumn(60.0, 60.0, Priority.NEVER, HPos.LEFT);
-            ColumnConstraints powerColumn       = LayoutUtils.createColumn(80.0, 80.0, Priority.NEVER, HPos.LEFT);
+            ColumnConstraints nameColumn        = LayoutUtils.createColumn(100.0, 100.0, Priority.SOMETIMES, HPos.LEFT);
+            ColumnConstraints typeColumn        = LayoutUtils.createColumn(50.0, 50.0, Priority.NEVER, HPos.LEFT);
+            ColumnConstraints powerColumn       = LayoutUtils.createColumn(50.0, 50.0, Priority.NEVER, HPos.LEFT);
             ColumnConstraints descriptionColumn = LayoutUtils.createColumn(10.0, null, Priority.ALWAYS, HPos.LEFT);
 
             GridPane gridPane = LayoutUtils.createGridPaneWithColumns(iconColumn, nameColumn, typeColumn, powerColumn, descriptionColumn);
