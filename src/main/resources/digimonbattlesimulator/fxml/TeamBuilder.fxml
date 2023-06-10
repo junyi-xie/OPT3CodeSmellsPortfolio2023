@@ -36,26 +36,26 @@
                   <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
                   <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="120.0" />
                </columnConstraints>
                <Label text="Digimon" GridPane.columnIndex="0">
                   <font>
-                     <Font size="24.0" />
+                     <Font name="System Bold" size="24.0" />
                   </font>
                </Label>
                <Label text="Type" GridPane.columnIndex="1">
                   <font>
-                     <Font size="24.0" />
+                     <Font name="System Bold" size="24.0" />
                   </font>
                </Label>
                <Label text="Ability" GridPane.columnIndex="2">
                   <font>
-                     <Font size="24.0" />
+                     <Font name="System Bold" size="24.0" />
                   </font>
                </Label>
                <Label text="Stats" GridPane.columnIndex="3">
                   <font>
-                     <Font size="24.0" />
+                     <Font name="System Bold" size="24.0" />
                   </font>
                </Label>
             </GridPane>

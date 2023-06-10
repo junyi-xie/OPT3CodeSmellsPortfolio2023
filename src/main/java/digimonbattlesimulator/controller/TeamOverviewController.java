@@ -64,12 +64,12 @@ public class TeamOverviewController implements Initializable {
         allTeamsVBox.setSpacing(5.0);
 
         for (Team team : teams) {
-            // Create VBox for each team
-            VBox singleTeamVBox = new VBox();
-            singleTeamVBox.setMaxWidth(405.0);
-            singleTeamVBox.setPadding(new Insets(5.0));
-            singleTeamVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;");
-            singleTeamVBox.setOnMouseClicked(event -> onClickLoadTeamButton(event, team));
+            // Create VBox for each team info view
+            VBox teamInfoVBox = new VBox();
+            teamInfoVBox.setMaxWidth(405.0);
+            teamInfoVBox.setPadding(new Insets(5.0));
+            teamInfoVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;");
+            teamInfoVBox.setOnMouseClicked(event -> onClickLoadTeamButton(event, team));
 
             // Create team name label
             Label teamNameLabel = new Label();
@@ -101,16 +101,30 @@ public class TeamOverviewController implements Initializable {
             HBox spriteGridPaneHBox = new HBox();
             spriteGridPaneHBox.getChildren().add(spriteGridPane);
 
-            // Add Team name label and Digimon sprite HBox
-            singleTeamVBox.getChildren().addAll(teamNameLabelHBox, spriteGridPaneHBox);
+            // Add Team name label and Digimon sprite VBox into singleTeamViewHBox
+            teamInfoVBox.getChildren().addAll(teamNameLabelHBox, spriteGridPaneHBox);
 
-            // All the single team VBox to all teams VBox so we can apply padding
-            allTeamsVBox.getChildren().add(singleTeamVBox);
+            // Create HBox to hold teamInfoVBox and delete team button
+            HBox singleTeamViewHBox = new HBox();
+            singleTeamViewHBox.setAlignment(Pos.CENTER_LEFT);
+            singleTeamViewHBox.setSpacing(10.0);
+            singleTeamViewHBox.getChildren().addAll(teamInfoVBox, createDeleteTeamButton(team));
+
+            // All the single team VBox to all teams VBox, so we can apply padding
+            allTeamsVBox.getChildren().add(singleTeamViewHBox);
         }
 
         // Set the new content of the team overview container to the 'digimonTeamViewGridPane' wrapped in an VBox and update the center view
         currentTeamOverviewContainer.getChildren().addAll(allTeamsVBox);
         teamOverviewBorderPane.setCenter(currentTeamOverviewContainer);
+    }
+
+    public MFXButton createDeleteTeamButton(Team team) {
+        MFXButton deleteTeamButton = new MFXButton("Delete Team");
+        deleteTeamButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
+        deleteTeamButton.setPadding(new Insets(7.5, 15, 7.5, 15));
+        deleteTeamButton.setOnAction(event -> onClickRemoveTeamButton(team));
+        return deleteTeamButton;
     }
 
     public void onClickBackToMainButton(ActionEvent actionEvent) {
@@ -140,8 +154,9 @@ public class TeamOverviewController implements Initializable {
         ShowScene.switchScene((BorderPane) ((Node) mouseEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml")));
     }
 
-    public void onClickRemoveTeamButton(ActionEvent actionEvent) {
-        //TODO delete team from team overview screen
+    public void onClickRemoveTeamButton(Team team) {
+        teams.remove(team);
+        updateTeamOverview();
     }
 
 

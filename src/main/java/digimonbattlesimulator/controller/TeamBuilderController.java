@@ -102,7 +102,7 @@ public class TeamBuilderController implements Initializable {
             digimonVBox.setAlignment(Pos.BOTTOM_CENTER);
             digimonVBox.setMaxSize(97.5, 200.0);
             digimonVBox.setPadding(new Insets(5.0));
-            digimonVBox.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
+            digimonVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
 
             // Add Digimon sprite and name label
             digimonVBox.getChildren().addAll(createRemoveDigimonButton(digimon), loadSprite(digimon.getSpritePath()), new Label(digimon.getName()));
@@ -134,7 +134,7 @@ public class TeamBuilderController implements Initializable {
             ColumnConstraints typeColumn    = makeColumn(100.0, 100.0, Priority.SOMETIMES);
             ColumnConstraints abilityColumn = makeColumn(100.0, 100.0, Priority.SOMETIMES);
             ColumnConstraints statsColumn   = makeColumn(100.0, 100.0, Priority.NEVER);
-            ColumnConstraints buttonColumn  = makeColumn(10.0, 100.0, Priority.SOMETIMES);
+            ColumnConstraints buttonColumn  = makeColumn(10.0, 120.0, Priority.SOMETIMES);
 
             // Add the column constraints to the digimonGridPane
             digimonGridPane.getColumnConstraints().addAll(spriteColumn, nameColumn, typeColumn, abilityColumn, statsColumn, buttonColumn);
@@ -187,12 +187,14 @@ public class TeamBuilderController implements Initializable {
     //TODO do something about all the method below
     public MFXButton createAddDigimonButton(Digimon digimon) {
         MFXButton addDigimonButton = new MFXButton("Add to team");
-        addDigimonButton.setStyle("-fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
+        addDigimonButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
+        addDigimonButton.setPadding(new Insets(7.5, 15, 7.5, 15));
         addDigimonButton.setOnAction(event -> onClickAddDigimonButton(digimon));
         return addDigimonButton;
     }
 
     public MFXButton createRemoveDigimonButton(Digimon digimon) {
+        //TODO position of this needs to be changed to digimon overview screen
         MFXButton removeDigimonButton = new MFXButton("Remove");
         removeDigimonButton.setOnAction(event -> onClickRemoveDigimonButton(digimon));
         return removeDigimonButton;
