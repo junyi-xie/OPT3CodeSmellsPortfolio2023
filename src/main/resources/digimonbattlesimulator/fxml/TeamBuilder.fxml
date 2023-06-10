@@ -16,7 +16,7 @@
       <top>
          <VBox BorderPane.alignment="CENTER">
             <HBox alignment="CENTER_LEFT" spacing="15.0">
-               <MFXButton onAction="#onClickBackButton" text="Go back" />
+               <MFXButton onAction="#onClickBackToTeamOverviewButton" text="Go back" />
                <Label fx:id="labelTeamName">
                   <font>
                      <Font size="40.0" />
@@ -30,13 +30,13 @@
       </top>
       <center>
          <VBox maxWidth="800.0" spacing="10.0" BorderPane.alignment="TOP_LEFT">
-            <GridPane hgap="10.0">
+            <GridPane minWidth="10.0" maxWidth="800.0" hgap="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="ALWAYS" />
-                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="80.0" />
+                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="90.0" />
+                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="100.0" />
                </columnConstraints>
                <Label text="Digimon" GridPane.columnIndex="0">
                   <font>

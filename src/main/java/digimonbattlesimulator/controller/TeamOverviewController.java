@@ -2,7 +2,8 @@ package digimonbattlesimulator.controller;
 
 import digimonbattlesimulator.team.Team;
 import digimonbattlesimulator.team.TeamBuilderFactory;
-import digimonbattlesimulator.util.ShowScene;
+import digimonbattlesimulator.utils.ShowScene;
+import digimonbattlesimulator.utils.layout.LayoutUtils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +16,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -27,7 +25,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TeamOverviewController implements Initializable {
@@ -89,12 +86,12 @@ public class TeamOverviewController implements Initializable {
 
             // Create column constraints to accommodate all possible Digimon in a single team container
             for (int i = 0; i < 8; i++) {
-                spriteGridPane.getColumnConstraints().add(makeColumn(45.0, 45.0, Priority.NEVER, HPos.CENTER));
+                spriteGridPane.getColumnConstraints().add(LayoutUtils.createColumn(45.0, 45.0, Priority.NEVER, HPos.CENTER));
             }
 
             // Add Digimon sprite to sprite GridPane
             for (int i = 0; i < team.getDigimonTeam().size(); i++) {
-                spriteGridPane.add(loadSprite(team.getDigimonTeam().get(i).getSpritePath()), i, 0);
+                spriteGridPane.add(LayoutUtils.createSpriteImageView(team.getDigimonTeam().get(i).getSpritePath()), i, 0);
             }
 
             // Create an HBox to wrap the SpriteGridPane
@@ -120,9 +117,9 @@ public class TeamOverviewController implements Initializable {
     }
 
     public MFXButton createDeleteTeamButton(Team team) {
-        MFXButton deleteTeamButton = new MFXButton("Delete Team");
+        MFXButton deleteTeamButton = new MFXButton("Delete team");
         deleteTeamButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
-        deleteTeamButton.setPadding(new Insets(7.5, 15, 7.5, 15));
+        deleteTeamButton.setPadding(new Insets(5.0, 12.5, 5.0, 12.5));
         deleteTeamButton.setOnAction(event -> onClickRemoveTeamButton(team));
         return deleteTeamButton;
     }
@@ -157,25 +154,5 @@ public class TeamOverviewController implements Initializable {
     public void onClickRemoveTeamButton(Team team) {
         teams.remove(team);
         updateTeamOverview();
-    }
-
-
-    //TODO remove code smells, duplicate code
-    public ImageView loadSprite(String spritePath) {
-        ImageView sprite = new ImageView();
-        sprite.setFitWidth(45.0);
-        sprite.setFitHeight(45.0);
-        sprite.setPreserveRatio(true);
-        sprite.setImage(new Image(Objects.requireNonNull(getClass().getResource(spritePath)).toExternalForm()));
-        return sprite;
-    }
-
-    public ColumnConstraints makeColumn(Double minWidth, Double maxWidth, Priority hgrow, HPos halignment) {
-        ColumnConstraints column = new ColumnConstraints();
-        if (minWidth != null) column.setMinWidth(minWidth);
-        if (maxWidth != null) column.setMaxWidth(maxWidth);
-        column.setHgrow(hgrow);
-        column.setHalignment(halignment);
-        return column;
     }
 }

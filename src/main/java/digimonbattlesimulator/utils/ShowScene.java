@@ -1,4 +1,4 @@
-package digimonbattlesimulator.util;
+package digimonbattlesimulator.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;

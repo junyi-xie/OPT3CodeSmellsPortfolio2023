@@ -14,8 +14,8 @@ public class Yukidarumon extends Digimon {
 
     @Override
     public String getSpritePath() {
-        // return "/digimonbattlesimulator/sprites/yukidarumon_sprite.gif";
-        return "/digimonbattlesimulator/sprites/yukidarumon_sprite.png";
+        return "/digimonbattlesimulator/sprites/yukidarumon_sprite.gif";
+        // return "/digimonbattlesimulator/sprites/yukidarumon_sprite.png";
     }
 
     @Override

@@ -1,6 +1,6 @@
 package digimonbattlesimulator.controller;
 
-import digimonbattlesimulator.util.ShowScene;
+import digimonbattlesimulator.utils.ShowScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

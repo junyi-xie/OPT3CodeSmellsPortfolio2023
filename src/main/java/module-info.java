@@ -9,6 +9,6 @@ module OPT3CodeSmellsPortfolio {
     opens digimonbattlesimulator.controller to javafx.fxml;
     exports digimonbattlesimulator.digimon;
     exports digimonbattlesimulator.team;
-    exports digimonbattlesimulator.util;
-    opens digimonbattlesimulator.util to javafx.fxml;
+    exports digimonbattlesimulator.utils;
+    opens digimonbattlesimulator.utils to javafx.fxml;
 }

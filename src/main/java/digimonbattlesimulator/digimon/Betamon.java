@@ -14,8 +14,8 @@ public class Betamon extends Digimon {
 
     @Override
     public String getSpritePath() {
-        // return "/digimonbattlesimulator/sprites/betamon_sprite.gif";
-        return "/digimonbattlesimulator/sprites/betamon_sprite.png";
+        return "/digimonbattlesimulator/sprites/betamon_sprite.gif";
+        // return "/digimonbattlesimulator/sprites/betamon_sprite.png";
     }
 
     @Override
