@@ -23,7 +23,9 @@ public class AttackTechnique {
         return name;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() { 
+        return description; 
+    }
 
     public String getPower() {
         return Integer.toString(power);
