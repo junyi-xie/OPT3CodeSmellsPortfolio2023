@@ -1,6 +1,11 @@
 package digimonbattlesimulator.utils.layout;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,5 +46,22 @@ public class LayoutUtils {
         VBox statsVBox = new VBox();
         statsVBox.getChildren().addAll(label, text);
         return statsVBox;
+    }
+
+    public static VBox createCustomVBox(double maxWidth, double maxHeight, Pos alignment, Insets insets) {
+        VBox customVBox = new VBox();
+        customVBox.setMaxSize(maxWidth, maxHeight);
+        customVBox.setAlignment(alignment);
+        customVBox.setPadding(insets);
+        customVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;");
+        return customVBox;
+    }
+
+    public static MFXButton createCustomButton(String text, Insets insets, EventHandler<ActionEvent> onClick) {
+        MFXButton customButton = new MFXButton(text);
+        customButton.setPadding(insets);
+        customButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
+        customButton.setOnAction(onClick);
+        return customButton;
     }
 }

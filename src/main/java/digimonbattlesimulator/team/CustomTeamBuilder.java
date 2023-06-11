@@ -1,7 +1,7 @@
 package digimonbattlesimulator.team;
 
 public class CustomTeamBuilder extends TeamBuilder {
-    public CustomTeamBuilder(String name, int maxTeamSize) {
-        super(name, maxTeamSize);
+    public CustomTeamBuilder(String teamName, int maxTeamSize) {
+        super(teamName, maxTeamSize);
     }
 }

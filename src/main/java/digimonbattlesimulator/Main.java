@@ -25,7 +25,7 @@ public class Main extends Application {
         stage.setMinHeight(600);
         stage.setMinWidth(800);
 
-        MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+        MFXThemeManager.addOn(scene, Themes.DEFAULT);
 
         stage.setScene(scene);
         stage.show();

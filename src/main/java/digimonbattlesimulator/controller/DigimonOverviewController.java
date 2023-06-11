@@ -66,39 +66,40 @@ public class DigimonOverviewController implements Initializable {
     }
 
     public void createAttackTechniqueCell() {
+        // Get the current digimon overview container and remove existing elements from index 1 and above
+        VBox currentDigimonOverviewContainer = (VBox) digimonOverviewBorderPane.getCenter();
+        currentDigimonOverviewContainer.getChildren().remove(1, currentDigimonOverviewContainer.getChildren().size());
 
-        //TODO fix variable names, was too lazy
-        VBox t = (VBox) digimonOverviewBorderPane.getCenter();
-        t.getChildren().remove(1, t.getChildren().size());
-
-        VBox aa = new VBox();
-        aa.setSpacing(10.0);
+        // Create a container for the attack techniques
+        VBox attackTechniqueContainer = new VBox();
+        attackTechniqueContainer.setSpacing(10.0);
 
         for (AttackTechnique attackTechnique : selectedDigimon.getAttackTechniques()) {
-
+            // Create column constraints for the gridpane
             ColumnConstraints iconColumn        = LayoutUtils.createColumn(10.0, null, Priority.NEVER, HPos.LEFT);
             ColumnConstraints nameColumn        = LayoutUtils.createColumn(100.0, 100.0, Priority.SOMETIMES, HPos.LEFT);
             ColumnConstraints typeColumn        = LayoutUtils.createColumn(50.0, 50.0, Priority.NEVER, HPos.LEFT);
             ColumnConstraints powerColumn       = LayoutUtils.createColumn(50.0, 50.0, Priority.NEVER, HPos.LEFT);
             ColumnConstraints descriptionColumn = LayoutUtils.createColumn(10.0, null, Priority.ALWAYS, HPos.LEFT);
 
-            GridPane gridPane = LayoutUtils.createGridPaneWithColumns(iconColumn, nameColumn, typeColumn, powerColumn, descriptionColumn);
-            gridPane.setHgap(10.0);
+            // Create the gridpane and set column constraints
+            GridPane attackTechniqueGridPane = LayoutUtils.createGridPaneWithColumns(iconColumn, nameColumn, typeColumn, powerColumn, descriptionColumn);
+            attackTechniqueGridPane.setHgap(10.0);
 
-            gridPane.add(LayoutUtils.createImageView(attackTechnique.getIcon(), 40.0, 40.0, true), 0, 0);
-            gridPane.add(new Label(attackTechnique.getName()), 1, 0);
-            gridPane.add(new Label(attackTechnique.getType().toString()), 2, 0);
-            gridPane.add(new Label(attackTechnique.getPower()), 3, 0);
-            gridPane.add(new Label(attackTechnique.getDescription()), 4, 0);
+            // Add attack technique information to the gridpane
+            attackTechniqueGridPane.add(LayoutUtils.createImageView(attackTechnique.getIcon(), 40.0, 40.0, true), 0, 0);
+            attackTechniqueGridPane.add(new Label(attackTechnique.getName()), 1, 0);
+            attackTechniqueGridPane.add(new Label(attackTechnique.getType().toString()), 2, 0);
+            attackTechniqueGridPane.add(new Label(attackTechnique.getPower()), 3, 0);
+            attackTechniqueGridPane.add(new Label(attackTechnique.getDescription()), 4, 0);
 
-            //TODO fix text overflowing
-
-            aa.getChildren().add(gridPane);
+            // Add the attack technique gridpane to the attack technique container
+            attackTechniqueContainer.getChildren().add(attackTechniqueGridPane);
         }
 
-
-        t.getChildren().addAll(aa);
-        digimonOverviewBorderPane.setCenter(t);
+        // Add the attack technique container to the digimon overview container
+        currentDigimonOverviewContainer.getChildren().addAll(attackTechniqueContainer);
+        digimonOverviewBorderPane.setCenter(currentDigimonOverviewContainer);
     }
 
     public void onClickBackToTeambuilderButton(ActionEvent actionEvent) {

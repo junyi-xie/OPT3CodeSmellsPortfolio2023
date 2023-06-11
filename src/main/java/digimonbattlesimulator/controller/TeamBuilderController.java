@@ -74,11 +74,7 @@ public class TeamBuilderController implements Initializable {
             digimonTeamViewGridPane.getColumnConstraints().add(digimonColumn);
 
             // Create VBox for Digimon
-            VBox digimonVBox = new VBox();
-            digimonVBox.setAlignment(Pos.BOTTOM_CENTER);
-            digimonVBox.setMaxSize(87.5, 200.0);
-            digimonVBox.setPadding(new Insets(5.0));
-            digimonVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4");
+            VBox digimonVBox = LayoutUtils.createCustomVBox(87.5, 200.0, Pos.BOTTOM_CENTER, new Insets(5.0));
             digimonVBox.setOnMouseClicked(event -> onClickOverviewDigimonButton(event, digimon));
 
             // Add Digimon sprite and name label
@@ -118,7 +114,7 @@ public class TeamBuilderController implements Initializable {
             digimonGridPane.add(new Label(digimon.getType().toString()), 2, 0);
             digimonGridPane.add(new Label(digimon.getAbility().toString()), 3, 0);
             digimonGridPane.add(createDigimonStatsGridPane(digimon), 4, 0);
-            digimonGridPane.add(createAddDigimonButton(digimon), 5, 0);
+            digimonGridPane.add(LayoutUtils.createCustomButton("Add to team", new Insets(5.0, 12.5, 5.0, 12.5), event -> onClickAddDigimonButton(digimon)), 5, 0);
 
             // Add the digimonGridPane to the digimon cell container
             currentDigimonCellContainer.getChildren().add(digimonGridPane);
@@ -167,13 +163,5 @@ public class TeamBuilderController implements Initializable {
         if (digimonTeam.getDigimonTeam().size() >= digimonTeam.getTeamBuilder().getMaxTeamSize()) return;
         digimonTeam.addDigimon(digimon);
         updateTeamViewCell();
-    }
-
-    public MFXButton createAddDigimonButton(Digimon digimon) {
-        MFXButton addDigimonButton = new MFXButton("Add to team");
-        addDigimonButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
-        addDigimonButton.setPadding(new Insets(5.0, 12.5, 5.0, 12.5));
-        addDigimonButton.setOnAction(event -> onClickAddDigimonButton(digimon));
-        return addDigimonButton;
     }
 }

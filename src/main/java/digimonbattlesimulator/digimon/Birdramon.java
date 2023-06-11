@@ -17,8 +17,8 @@ public class Birdramon extends Digimon {
 
     @Override
     public String getSpritePath() {
-        // return "/digimonbattlesimulator/sprites/birdramon_sprite.gif";
-        return "/digimonbattlesimulator/sprites/birdramon_sprite.png";
+        return "/digimonbattlesimulator/sprites/birdramon_sprite.gif";
+        // return "/digimonbattlesimulator/sprites/birdramon_sprite.png";
     }
 
     @Override

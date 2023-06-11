@@ -3,7 +3,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -37,11 +36,11 @@
                      <ColumnConstraints hgrow="NEVER" prefWidth="80.0"/>
                      <ColumnConstraints hgrow="NEVER" prefWidth="140.0"/>
                   </columnConstraints>
-                  <ImageView fx:id="digimonSprite" fitHeight="100.0" fitWidth="100.0" preserveRatio="true"/>
+                  <ImageView fx:id="digimonSprite" fitHeight="100.0" fitWidth="100.0" preserveRatio="true" GridPane.columnIndex="0"/>
                   <VBox spacing="5.0" GridPane.columnIndex="1">
                      <Label text="Name">
                         <font>
-                           <Font name="System Bold Italic" size="18.0"/>
+                           <Font name="System Bold Italic" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonNameLabel" />
@@ -49,7 +48,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="2">
                      <Label text="Characteristics">
                         <font>
-                           <Font name="System Bold Italic" size="18.0"/>
+                           <Font name="System Bold Italic" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonCharacteristicsLabel" />
@@ -57,7 +56,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="3">
                      <Label text="Type">
                         <font>
-                           <Font name="System Bold Italic" size="18.0"/>
+                           <Font name="System Bold Italic" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonTypeLabel"/>
@@ -65,7 +64,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="4">
                      <Label text="Ability">
                         <font>
-                           <Font name="System Bold Italic" size="18.0"/>
+                           <Font name="System Bold Italic" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonAbilityLabel"/>
@@ -73,7 +72,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="5">
                      <Label text="Stats">
                         <font>
-                           <Font name="System Bold Italic" size="18.0"/>
+                           <Font name="System Bold Italic" size="16.0"/>
                         </font>
                      </Label>
                      <GridPane hgap="10.0">
@@ -133,22 +132,22 @@
                   </columnConstraints>
                   <Label text="Attack Techniques" GridPane.columnIndex="0">
                      <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="14.0"/>
                      </font>
                   </Label>
                   <Label text="Type" GridPane.columnIndex="1">
                      <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="14.0"/>
                      </font>
                   </Label>
                   <Label text="Power" GridPane.columnIndex="2">
                      <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="14.0"/>
                      </font>
                   </Label>
                   <Label text="Description" GridPane.columnIndex="3">
                      <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="14.0"/>
                      </font>
                   </Label>
                </GridPane>

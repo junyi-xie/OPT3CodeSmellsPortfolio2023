@@ -62,10 +62,7 @@ public class TeamOverviewController implements Initializable {
 
         for (Team team : teams) {
             // Create VBox for each team info view
-            VBox teamInfoVBox = new VBox();
-            teamInfoVBox.setMaxWidth(405.0);
-            teamInfoVBox.setPadding(new Insets(5.0));
-            teamInfoVBox.setStyle("-fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-radius: 4; -fx-background-color: transparent;");
+            VBox teamInfoVBox = LayoutUtils.createCustomVBox(405.0, 50.0, Pos.CENTER, new Insets(5.0));
             teamInfoVBox.setOnMouseClicked(event -> onClickLoadTeamButton(event, team));
 
             // Create team name label
@@ -105,7 +102,7 @@ public class TeamOverviewController implements Initializable {
             HBox singleTeamViewHBox = new HBox();
             singleTeamViewHBox.setAlignment(Pos.CENTER_LEFT);
             singleTeamViewHBox.setSpacing(10.0);
-            singleTeamViewHBox.getChildren().addAll(teamInfoVBox, createDeleteTeamButton(team));
+            singleTeamViewHBox.getChildren().addAll(teamInfoVBox, LayoutUtils.createCustomButton("Delete team", new Insets(5.0, 12.5, 5.0, 12.5), event -> onClickRemoveTeamButton(team)));
 
             // All the single team VBox to all teams VBox, so we can apply padding
             allTeamsVBox.getChildren().add(singleTeamViewHBox);
@@ -131,7 +128,6 @@ public class TeamOverviewController implements Initializable {
 
         // Add observer
         TeamBuilderController.digimonTeam.addObserver(TeamBuilderController.digimonTeam.getTeamBuilder());
-
         ShowScene.switchScene((BorderPane) ((Node) actionEvent.getSource()).getScene().getRoot(), new FXMLLoader(getClass().getResource("/digimonbattlesimulator/fxml/TeamBuilder.fxml")));
     }
 
@@ -146,13 +142,5 @@ public class TeamOverviewController implements Initializable {
     public void onClickRemoveTeamButton(Team team) {
         teams.remove(team);
         updateTeamOverview();
-    }
-
-    public MFXButton createDeleteTeamButton(Team team) {
-        MFXButton deleteTeamButton = new MFXButton("Delete team");
-        deleteTeamButton.setStyle("-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);");
-        deleteTeamButton.setPadding(new Insets(5.0, 12.5, 5.0, 12.5));
-        deleteTeamButton.setOnAction(event -> onClickRemoveTeamButton(team));
-        return deleteTeamButton;
     }
 }
