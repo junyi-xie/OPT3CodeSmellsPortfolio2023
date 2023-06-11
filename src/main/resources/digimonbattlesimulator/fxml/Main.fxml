@@ -14,12 +14,12 @@
             <Image url="@../images/digimon_logo.png"/>
          </ImageView>
          <VBox alignment="CENTER" spacing="20.0">
-            <MFXButton onAction="#onClickBattleButton" style="-fx-font-size: 16; -fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #000;" text="Battle">
+            <MFXButton onAction="#onClickBattleButton" style="-fx-font-size: 16; -fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: #000;" text="Battle">
                <padding>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
                </padding>
             </MFXButton>
-            <MFXButton onAction="#onClickTeambuilderButton" style="-fx-font-size: 16; -fx-font-weight: 700; -fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #000;" text="Teambuilder">
+            <MFXButton onAction="#onClickTeambuilderButton" style="-fx-font-size: 16; -fx-font-weight: 700; -fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: #000;" text="Teambuilder">
                <padding>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
                </padding>

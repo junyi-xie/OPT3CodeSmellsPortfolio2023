@@ -12,18 +12,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digimonbattlesimulator.controller.DigimonOverviewController">
    <BorderPane fx:id="digimonOverviewBorderPane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <top>
-         <VBox>
-            <HBox alignment="CENTER_LEFT" spacing="15.0">
-               <MFXButton onAction="#onClickBackToTeambuilderButton" text="Go back" />
-               <Label text="Digimon Overview">
-                  <font>
-                     <Font size="40.0" />
-                  </font>
-               </Label>
+         <VBox spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <MFXButton onAction="#onClickBackToTeambuilderButton" style="-fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #000; -fx-background-color: transparent;" text="🠈 Go back">
+                  <padding>
+                     <Insets bottom="7.5" left="12.5" right="12.5" top="7.5" />
+                  </padding>
+               </MFXButton>
+               <ImageView fitWidth="250.0" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/digimon_logo_top.png" />
+                  </image>
+               </ImageView>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                <GridPane hgap="10.0">
@@ -40,7 +45,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="1">
                      <Label text="Name">
                         <font>
-                           <Font name="System Bold Italic" size="16.0"/>
+                           <Font name="System Bold" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonNameLabel" />
@@ -48,7 +53,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="2">
                      <Label text="Characteristics">
                         <font>
-                           <Font name="System Bold Italic" size="16.0"/>
+                           <Font name="System Bold" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonCharacteristicsLabel" />
@@ -56,7 +61,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="3">
                      <Label text="Type">
                         <font>
-                           <Font name="System Bold Italic" size="16.0"/>
+                           <Font name="System Bold" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonTypeLabel"/>
@@ -64,7 +69,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="4">
                      <Label text="Ability">
                         <font>
-                           <Font name="System Bold Italic" size="16.0"/>
+                           <Font name="System Bold" size="16.0"/>
                         </font>
                      </Label>
                      <Label fx:id="digimonAbilityLabel"/>
@@ -72,7 +77,7 @@
                   <VBox spacing="5.0" GridPane.columnIndex="5">
                      <Label text="Stats">
                         <font>
-                           <Font name="System Bold Italic" size="16.0"/>
+                           <Font name="System Bold" size="16.0"/>
                         </font>
                      </Label>
                      <GridPane hgap="10.0">
@@ -115,9 +120,9 @@
                   <MFXButton onAction="#onClickRemoveDigimon" text="Remove from team" style="-fx-border-color: linear-gradient(to left, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-background-color: transparent; -fx-text-fill: rgba(0, 0, 0, 1);" GridPane.columnIndex="6"/>
                </GridPane>
             </HBox>
-            <BorderPane.margin>
-               <Insets bottom="20.0" />
-            </BorderPane.margin>
+            <padding>
+               <Insets bottom="10.0" />
+            </padding>
          </VBox>
       </top>
       <center>

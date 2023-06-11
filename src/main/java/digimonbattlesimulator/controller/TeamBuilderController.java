@@ -31,8 +31,6 @@ import java.util.ResourceBundle;
 public class TeamBuilderController implements Initializable {
     @FXML
     private BorderPane teamBuilderBorderPane;
-    @FXML
-    private Label labelTeamName;
     public static Team digimonTeam = null;
 
     @Override
@@ -53,9 +51,6 @@ public class TeamBuilderController implements Initializable {
         // Get the current team view container and remove existing elements from index 1 and above
         VBox currentTeamViewContainer = (VBox) teamBuilderBorderPane.getTop();
         currentTeamViewContainer.getChildren().remove(1, currentTeamViewContainer.getChildren().size());
-
-        // Set the label text to the team name from the team builder
-        labelTeamName.setText(digimonTeam.getTeamBuilder().getTeamName());
 
         // Check if Digimon team is empty; if empty, add "you have no digimon lol" text
         if (digimonTeam.getDigimonTeam().isEmpty()) {

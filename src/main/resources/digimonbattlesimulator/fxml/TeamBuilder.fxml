@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -9,34 +12,37 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digimonbattlesimulator.controller.TeamBuilderController">
    <BorderPane fx:id="teamBuilderBorderPane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <top>
-         <VBox BorderPane.alignment="CENTER">
-            <HBox alignment="CENTER_LEFT" spacing="15.0">
-               <MFXButton onAction="#onClickBackToTeamOverviewButton" text="Go back" />
-               <Label fx:id="labelTeamName">
-                  <font>
-                     <Font size="40.0" />
-                  </font>
-               </Label>
+         <VBox spacing="15.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <MFXButton onAction="#onClickBackToTeamOverviewButton" style="-fx-font-weight: 700; -fx-border-color: linear-gradient(to right, #fe9819, #008cc7); -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #000; -fx-background-color: transparent;" text="🠈 Go back">
+                  <padding>
+                     <Insets bottom="7.5" left="12.5" right="12.5" top="7.5" />
+                  </padding>
+               </MFXButton>
+               <ImageView fitWidth="250.0" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/digimon_logo_top.png" />
+                  </image>
+               </ImageView>
             </HBox>
-            <BorderPane.margin>
-               <Insets bottom="20.0" />
-            </BorderPane.margin>
+            <padding>
+               <Insets bottom="10.0" />
+            </padding>
          </VBox>
       </top>
       <center>
          <VBox maxWidth="800.0" spacing="10.0" BorderPane.alignment="TOP_LEFT">
-            <GridPane minWidth="10.0" maxWidth="800.0" hgap="10.0">
+            <GridPane hgap="10.0" maxWidth="800.0" minWidth="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="ALWAYS" />
-                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="80.0" />
-                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="90.0" />
-                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="NEVER" halignment="LEFT" prefWidth="100.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" prefWidth="80.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" prefWidth="90.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" prefWidth="100.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" prefWidth="100.0" />
                </columnConstraints>
                <Label text="Digimon" GridPane.columnIndex="0">
                   <font>
