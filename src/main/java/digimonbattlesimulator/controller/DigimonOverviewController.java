@@ -3,6 +3,7 @@ package digimonbattlesimulator.controller;
 import digimonbattlesimulator.digimon.AttackTechnique;
 import digimonbattlesimulator.digimon.Digimon;
 import digimonbattlesimulator.utils.ShowScene;
+import digimonbattlesimulator.utils.audio.KuruKuru;
 import digimonbattlesimulator.utils.layout.LayoutUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -108,7 +109,7 @@ public class DigimonOverviewController implements Initializable {
 
     public void onClickRemoveDigimon(ActionEvent actionEvent) {
         TeamBuilderController.digimonTeam.removeDigimon(selectedDigimon);
-
+        KuruKuru.play();
         // Back to TeamBuilderController
         onClickBackToTeambuilderButton(actionEvent);
     }

@@ -1,10 +1,17 @@
 package digimonbattlesimulator.controller;
 
-import digimonbattlesimulator.digimon.*;
+import digimonbattlesimulator.digimon.Agumon;
+import digimonbattlesimulator.digimon.Betamon;
+import digimonbattlesimulator.digimon.Birdramon;
+import digimonbattlesimulator.digimon.Deathmon;
+import digimonbattlesimulator.digimon.Digimon;
+import digimonbattlesimulator.digimon.Herta;
+import digimonbattlesimulator.digimon.Type;
+import digimonbattlesimulator.digimon.Yukidarumon;
 import digimonbattlesimulator.team.Team;
 import digimonbattlesimulator.utils.ShowScene;
+import digimonbattlesimulator.utils.audio.KuruKuru;
 import digimonbattlesimulator.utils.layout.LayoutUtils;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -157,6 +164,7 @@ public class TeamBuilderController implements Initializable {
     public void onClickAddDigimonButton(Digimon digimon) {
         if (digimonTeam.getDigimonTeam().size() >= digimonTeam.getTeamBuilder().getMaxTeamSize()) return;
         digimonTeam.addDigimon(digimon);
+        KuruKuru.play();
         updateTeamViewCell();
     }
 }
