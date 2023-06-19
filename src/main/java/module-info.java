@@ -1,4 +1,4 @@
-module OPT3CodeSmellsPortfolio {
+module DigimonBattleSimulator {
     requires javafx.controls;
     requires javafx.media;
     requires javafx.fxml;
